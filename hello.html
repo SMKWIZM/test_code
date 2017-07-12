@@ -5,7 +5,22 @@
 </head>
 <body>
 
-<p>hello,world!</p>
+<p id="test">hello,world!をクリックするとDOMを操作して文字列を足します。即時関数として実行します。</p>
+
+<script>
+
+(function(){
+var place = document.getElementById("test");
+place.addEventListener("click",function(eve){
+	place = document.body.insertAdjacentHTML("beforeend","クリックされたので文字列を足しているよ");
+	eve.preventDefault();
+},false);
+
+
+}());
+
+</script>
+
 
 </body>
 </html>
