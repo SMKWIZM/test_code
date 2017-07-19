@@ -16,39 +16,44 @@
                var c;
                var d;
                var radio_01;
+               var enemyHp, randomIntlc, damage;
+               var count = 1;
 
                a = document.form1.txtA.value;
                b = document.form1.txtB.value;
                c = document.form1.txtC.value;
-                 //ラジオボタンでの属性判定
-               radio_01 = document.form1.attributeRadio;
+               enemyHp = document.form1.txtE.value;
 
+               console.log(enemyHp);
+
+               //ラジオボタンでの属性判定
+               radio_01 = document.form1.attributeRadio;
 
                d = ((parseInt(a)/2 - parseInt(b)/4) * (radio_01.value/10000)) * (parseInt(c)/10000);
 
               //フォームに表示するダメージ値（乱数込み）
               document.form1.txtD.value = Math.ceil(d * randomInt);
 
-              //
-              for(i=1;i<=30;i++){
-              //乱数の計算をする関数
-              function getRandomInteger( min, max ) {
-              return Math.random() * (max - min) + min;
-              };
-                var randomIntlc = getRandomInteger(minrand,maxrand);
-                var dection = (function(){
-                  document.getElementById("vald").innerHTML += "試行回数" + i + "回目：" + Math.ceil(d * randomIntlc) + "<br>";
-              }());
+              while (enemyHp > 0)
+              {
+                  randomIntlc = getRandomInteger(minrand,maxrand);
+                  damage = Math.ceil(d * randomIntlc);
+                  enemyHp -= damage;
+                  document.getElementById("vald").innerHTML += "試行回数" + count + "回目：" + damage + " 残り体力：" + enemyHp + "<br>";
+                  count++;
               }
 
-              }
+           }
 
-      //フォームに乱数を出力するための関数
-      function getRandomInteger( min, max ) {
-          return Math.random() * (max - min) + min;
-        };
+           //フォームに乱数を出力するための関数
+           function getRandomInteger( min, max ) {
+               return Math.random() * (max - min) + min;
+           }
 
-      var randomInt = getRandomInteger(minrand,maxrand);
+           function getRandomInteger( min, max ) {
+               return Math.random() * (max - min) + min;
+           }
+           var randomInt = getRandomInteger(minrand,maxrand);
 
        </script>
 
@@ -69,11 +74,14 @@
           <br>
           <br>
        		<label>自軍攻撃力：</label>
-            <INPUT TYPE="text" NAME="txtA">
+            <INPUT TYPE="text" NAME="txtA" value="100">
           <br>
        		<label>相手防御力：</label>
-            <INPUT TYPE="text" NAME="txtB">
+            <INPUT TYPE="text" NAME="txtB" value="100">
           <br>
+           <label>相手体力：</label>
+           <INPUT TYPE="text" NAME="txtE" value="1000">
+           <br>
           <label>スキル倍率：</label>
             <INPUT TYPE="text" NAME="txtC" value="10000">
           <br>
