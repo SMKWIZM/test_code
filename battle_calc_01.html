@@ -1,0 +1,105 @@
+<html>
+   <head>
+   		<meta charset="UTF-8">
+       <title>簡易バトル計算機</title>
+       <script type="text/javascript">
+
+       //乱数の指定
+          var minrand = 0.88;
+          var maxrand = 1.12;
+
+
+          //ダメージ計算式用のJS
+           function Calc(){
+               var a;
+               var b;
+               var c;
+               var d;
+               var radio_01;
+
+               a = document.form1.txtA.value;
+               b = document.form1.txtB.value;
+               c = document.form1.txtC.value;
+                 //ラジオボタンでの属性判定
+               radio_01 = document.form1.attributeRadio;
+
+
+               d = ((parseInt(a)/2 - parseInt(b)/4) * (radio_01.value/10000)) * (parseInt(c)/10000);
+
+              //フォームに表示するダメージ値（乱数込み）
+              document.form1.txtD.value = Math.ceil(d * randomInt);
+
+              //
+              for(i=1;i<=30;i++){
+              //乱数の計算をする関数
+              function getRandomInteger( min, max ) {
+              return Math.random() * (max - min) + min;
+              };
+                var randomIntlc = getRandomInteger(minrand,maxrand);
+                var dection = (function(){
+                  document.getElementById("vald").innerHTML += "試行回数" + i + "回目：" + Math.ceil(d * randomIntlc) + "<br>";
+              }());
+              }
+
+              }
+
+      //フォームに乱数を出力するための関数
+      function getRandomInteger( min, max ) {
+          return Math.random() * (max - min) + min;
+        };
+
+      var randomInt = getRandomInteger(minrand,maxrand);
+
+       </script>
+
+   </head>
+   <body>
+
+
+  <div class="tab" id="tab1">
+   <h2>ダメージ計算式（簡易版）</h2>
+       <form name="form1">
+          <p><i>すうじをいれてね</i></p>
+
+          <label>相関なし：</label><input type="radio" name="attributeRadio" value="10000" checked="checked" />
+          <br>
+          <label>有効属性：</label><input type="radio" name="attributeRadio" value="12500" />
+          <br>
+          <label>対抗属性：</label><input type="radio" name="attributeRadio" value="7500" />
+          <br>
+          <br>
+       		<label>自軍攻撃力：</label>
+            <INPUT TYPE="text" NAME="txtA">
+          <br>
+       		<label>相手防御力：</label>
+            <INPUT TYPE="text" NAME="txtB">
+          <br>
+          <label>スキル倍率：</label>
+            <INPUT TYPE="text" NAME="txtC" value="10000">
+          <br>
+            <label style="font-size:80%;"><i>※スキル倍率10000=通常攻撃</i></label>
+          <br>
+           <input type="button" name="cmdCalc" value="計算する" onclick="Calc()">
+           <input type="reset" name="reset" value="リセット" />
+          <br>
+          <br>
+            <label>(ピュアな)ダメージ値</label>
+          <br>
+           <input type="text" name="txtD">
+           <p id="vald"></p>
+       </form>
+  </div>
+
+
+  <script>
+  </script>
+
+       <h3>注意事項</h3>
+       <ul>
+        <li>バトルの簡易的な計算式です</li>
+        <li>乱数は考慮していません</li>
+        <li>(いまのところ)計算機ではマイナスが普通にでますがゲーム上では1になります</li>
+       </ul>
+
+   </body>
+</html>
